@@ -16,3 +16,7 @@ class TransferStatus(str, enum.Enum):
 class EntryDirection(str, enum.Enum):
     DEBIT = "DEBIT"
     CREDIT = "CREDIT"
+
+class LedgerTransactionType(str, enum.Enum):
+    INITIAL_FUNDING = "INITIAL_FUNDING"
+    TRANSFER = "TRANSFER"

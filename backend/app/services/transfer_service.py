@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app.core.enums import (
     AccountStatus,
     EntryDirection,
+    LedgerTransactionType,
     TransferStatus,
 )
 from app.models import (
@@ -12,6 +13,7 @@ from app.models import (
     Transfer,
 )
 from app.schemas.transfer import TransferCreate
+from backend.app.services.ledger_service import validate_balanced_entries
 
 
 def create_transfer(
@@ -45,6 +47,7 @@ def create_transfer(
          
         ledger_transaction = LedgerTransaction(
             transfer_id=transfer.id,
+            transaction_type=LedgerTransactionType.TRANSFER
         )
 
         db.add(ledger_transaction)
@@ -125,23 +128,3 @@ def validate_transfer(
         raise ValueError("Insufficient balance")
     
 
-def validate_balanced_entries(
-    entries: list[LedgerEntry],
-) -> None:
-
-    total_debit = sum(
-        entry.amount
-        for entry in entries
-        if entry.direction == EntryDirection.DEBIT
-    )
-
-    total_credit = sum(
-        entry.amount
-        for entry in entries
-        if entry.direction == EntryDirection.CREDIT
-    )
-
-    if total_debit != total_credit:
-        raise ValueError(
-            "Ledger transaction is not balanced"
-        )
