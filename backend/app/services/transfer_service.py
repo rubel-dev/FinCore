@@ -13,7 +13,7 @@ from app.models import (
     Transfer,
 )
 from app.schemas.transfer import TransferCreate
-from backend.app.services.ledger_service import validate_balanced_entries
+from app.services.ledger_service import validate_balanced_entries
 
 
 def create_transfer(

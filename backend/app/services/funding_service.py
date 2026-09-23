@@ -10,7 +10,7 @@ from app.models import (
     LedgerEntry,
     LedgerTransaction,
 )
-from backend.app.services.ledger_service import validate_balanced_entries
+from app.services.ledger_service import validate_balanced_entries
 
 
 def fund_account(

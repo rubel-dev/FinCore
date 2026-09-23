@@ -5,7 +5,7 @@ from sqlalchemy import BigInteger, DateTime, ForeignKey, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
-from backend.app.core.enums import LedgerTransactionType
+from app.core.enums import LedgerTransactionType
 
 
 
